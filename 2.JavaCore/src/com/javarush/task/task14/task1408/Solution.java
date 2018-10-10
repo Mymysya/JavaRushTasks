@@ -41,15 +41,28 @@ public class Solution {
         hen.getCountOfEggsPerMonth();
     }
 
-    static class HenFactory {
+    public static class HenFactory {
 
         static Hen getHen(String country) {
             Hen hen = null;
 
-            if ()
+            if (country.equals(Country.BELARUS)){
+                hen = new BelarusianHen();
+            }
+            else if (country.equals(Country.UKRAINE)){
+
+                hen = new UkrainianHen();
+            }else if (country.equals(Country.MOLDOVA)){
+                hen = new MoldovanHen();
+            }else if (country.equals(Country.RUSSIA)){
+                hen = new RussianHen();
+            }
+
             return hen;
         }
     }
+
+
 
 
 

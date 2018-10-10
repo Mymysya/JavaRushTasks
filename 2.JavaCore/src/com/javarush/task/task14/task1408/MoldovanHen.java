@@ -6,4 +6,9 @@ public class MoldovanHen extends Hen{
     public int getCountOfEggsPerMonth() {
         return 3;
     }
+
+    @Override
+    public String getDescription(){
+        return super.getDescription()+" Моя страна - "+Country.MOLDOVA+". Я несу "+getCountOfEggsPerMonth()+" яиц в месяц.";
+    }
 }

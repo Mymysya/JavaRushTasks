@@ -12,28 +12,29 @@ package com.javarush.task.task13.task1303;
 4. В классе Cola должны быть реализованы все методы интерфейса Drink.
 */
 
+
 public class Solution {
     public static void main(String[] args) throws Exception {
         print(new Beer());
         print(new Cola());
     }
 
-    private static void print(Drink drink) {
+    private static void print(Drink3 drink) {
         System.out.println(drink.getClass().getSimpleName());
     }
 
-    public interface Drink {
+    public interface Drink3 {
         boolean isAlcoholic();
     }
 
-    public static class Beer implements Drink{
+    public static class Beer implements Drink3{
         @Override
         public boolean isAlcoholic() {
             return true;
         }
     }
 
-    public static class Cola implements Drink{
+    public static class Cola implements Drink3{
         @Override
         public boolean isAlcoholic() {
             return false;

@@ -15,15 +15,15 @@ package com.javarush.task.task13.task1302;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-        Drink beer = new AlcoholicBeer();
+        Drink2 beer = new AlcoholicBeer();
         System.out.println(beer.toString());
     }
 
-    public interface Drink {
+    public interface Drink2 {
         boolean isAlcoholic();
     }
 
-    public static class AlcoholicBeer implements Drink{
+    public static class AlcoholicBeer implements Drink2{
         @Override
         public String toString() {
             if (isAlcoholic()) {

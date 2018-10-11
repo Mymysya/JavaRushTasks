@@ -16,11 +16,12 @@ package com.javarush.task.task13.task1301;
 5. Метод isReadyToGoHome должен возвращать значение переменной READY_TO_GO_HOME.
 */
 
+//Заменить Drink1 on Drink
 public class Solution {
     public static void main(String[] args) throws Exception {
     }
 
-    public interface Drink {
+    public interface Drink1 {
         void askMore(String message);
 
         void sayThankYou();
@@ -28,7 +29,7 @@ public class Solution {
         boolean isReadyToGoHome();
     }
 
-    public interface Alcohol extends Drink {
+    public interface Alcohol extends Drink1 {
         boolean READY_TO_GO_HOME = false;
 
         void sleepOnTheFloor();

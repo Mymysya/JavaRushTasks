@@ -23,6 +23,8 @@ import java.util.Date;
 6. Метод run класса Violin должен выводить на консоль продолжительность игры в миллисекундах. Используй формат из примера.
 */
 
+import java.util.Date;
+
 public class Solution {
     public static int delay = 1000;
 
@@ -45,7 +47,7 @@ public class Solution {
         Date stopPlaying();
     }
 
-    public static class Violin {
+    public static class Violin implements MusicalInstrument{
         private String owner;
 
         public Violin(String owner) {
@@ -60,6 +62,18 @@ public class Solution {
         public Date stopPlaying() {
             System.out.println(this.owner + " stops playing");
             return new Date();
+        }
+
+        @Override
+        public void run() {
+
+            Date dateRun = startPlaying();
+
+            sleepNSeconds(1);
+
+            Date dateStop = stopPlaying();
+
+            System.out.println("Playing "+(dateStop.getTime() - dateRun.getTime())+" ms");
         }
     }
 }

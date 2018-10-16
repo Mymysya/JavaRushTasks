@@ -27,19 +27,16 @@ PS: метод sleep выбрасывает InterruptedException.
 */
 
 public class Solution {
-    public static volatile int countSeconds = 3;
+    public static volatile int countSeconds = 4;
 
     public static void main(String[] args) throws InterruptedException {
         RacingClock clock = new RacingClock();
 
         Thread.sleep(3500);
-        clock.disable = true;
         clock.interrupt();
     }
 
     public static class RacingClock extends Thread {
-
-        public static boolean disable;
 
         public RacingClock() {
             start();
@@ -47,22 +44,26 @@ public class Solution {
 
         public void run() {
 
-            while (countSeconds>=1) {
+            while (!interrupted()) {
 
                 try {
-                    Thread.sleep(1000);
+
+                    if (countSeconds >= 1) {
+
+                        System.out.print(countSeconds + " ");
+                        Thread.sleep(1000);
+                        countSeconds--;
+                    } else {
+                        System.out.println("Марш!");
+                        break;
+                    }
+
+
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.print(countSeconds+" ");
-
-                if (disable) {
                     System.out.print("Прервано!");
-                }else if (countSeconds==1){System.out.print("Марш!");}
-                countSeconds--;
+                    return;
+                }
             }
-
         }
     }
 }

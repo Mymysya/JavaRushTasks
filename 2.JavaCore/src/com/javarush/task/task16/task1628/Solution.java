@@ -57,7 +57,25 @@ public class Solution {
         private List<String> result = new ArrayList<String>();
 
         public void run() {
-            //add your code here - добавьте код тут
+
+            while (!isInterrupted()) {
+                if (isInterrupted()){
+                    break;
+                }
+                synchronized (reader) {//блокировка данного блока для других потоков
+
+                    try {
+                        if(reader.ready()) {//проверка что редер не открыт
+                            result.add(reader.readLine());
+                            countReadStrings.incrementAndGet();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }
         }
 
         @Override

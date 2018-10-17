@@ -25,16 +25,22 @@ package com.javarush.task.task16.task1630;
 6. Метод systemOutPrintln должен вызывать метод join у созданного объекта f.
 7. Вывод программы должен состоять из 2х строк. Каждая строка - содержимое одного файла.*/
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Solution {
     public static String firstFileName;
     public static String secondFileName;
 
-    //add your code here - добавьте код тут
+    static {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            //firstFileName = "e:\\1.txt";
+            firstFileName = reader.readLine();//e:\1.txt
+            secondFileName = reader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException {
         systemOutPrintln(firstFileName);
@@ -45,7 +51,8 @@ public class Solution {
         ReadFileInterface f = new ReadFileThread();
         f.setFileName(fileName);
         f.start();
-        //add your code here - добавьте код тут
+        f.join();
+
         System.out.println(f.getFileContent());
     }
 
@@ -60,5 +67,48 @@ public class Solution {
         void start();
     }
 
-    //add your code here - добавьте код тут
+//    3. Внутри класса Solution создай нить public static ReadFileThread, которая реализует
+//    интерфейс ReadFileInterface (Подумай, что больше подходит - Thread или Runnable)
+
+    public static class ReadFileThread extends Thread implements ReadFileInterface{
+
+        public String fileName;
+        public String strLine = "";
+
+        @Override
+        public void setFileName(String fullFileName) {
+            //3.1. Метод setFileName должен устанавливать имя файла, из которого будет читаться содержимое.
+            this.fileName = fullFileName;
+        }
+
+        @Override
+        public void run() {
+            //3.3. В методе run считай содержимое файла, закрой поток. Раздели пробелом строки файла.
+            try{
+                FileInputStream fstream = new FileInputStream(fileName);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+                String isstr = "";
+
+                while ((isstr = br.readLine()) != null){
+                    strLine += isstr+" ";
+                }
+
+                fstream.close();
+                br.close();
+
+            }catch (IOException e){
+                System.out.println("Ошибка");
+            }
+
+        }
+
+        @Override
+        public String getFileContent() {
+
+            //3.2. Метод getFileContent должен возвращать содержимое файла.
+            return strLine;
+        }
+    }
 }
+

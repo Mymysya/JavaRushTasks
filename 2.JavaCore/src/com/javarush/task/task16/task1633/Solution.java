@@ -25,7 +25,8 @@ package com.javarush.task.task16.task1633;
 4. Метод main должен прерывать две созданные нити типа Thread.
 5. Программа с помощью метода uncaughtException класса OurUncaughtExceptionHandler должна вывести 2 сообщения.
 6. Метод uncaughtException класса OurUncaughtExceptionHandler явно не вызывать.
-7. Вывод программы должен содержать строки: "Нить 1: My exception message" и "Нить 2: My exception message"*/
+7. Вывод программы должен содержать строки: "Нить 1: My exception message" и "Нить 2: My exception message".*/
+
 
 public class Solution {
     public static Thread.UncaughtExceptionHandler handler = new OurUncaughtExceptionHandler();
@@ -52,7 +53,7 @@ public class Solution {
         public void run() {
             try {
                 Thread.sleep(3000);
-            } catch (InterruptedException x) {
+            } catch (InterruptedException e) {
                 throw new RuntimeException("My exception message");
             }
         }

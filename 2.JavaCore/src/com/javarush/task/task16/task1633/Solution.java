@@ -27,7 +27,6 @@ package com.javarush.task.task16.task1633;
 6. Метод uncaughtException класса OurUncaughtExceptionHandler явно не вызывать.
 7. Вывод программы должен содержать строки: "Нить 1: My exception message" и "Нить 2: My exception message".*/
 
-
 public class Solution {
     public static Thread.UncaughtExceptionHandler handler = new OurUncaughtExceptionHandler();
 
@@ -36,6 +35,7 @@ public class Solution {
 
         Thread threadA = new Thread(commonThread, "Нить 1");
         Thread threadB = new Thread(commonThread, "Нить 2");
+
 
         threadA.start();
         threadB.start();

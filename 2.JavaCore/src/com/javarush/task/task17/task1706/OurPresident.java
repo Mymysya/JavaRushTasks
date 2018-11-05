@@ -20,8 +20,11 @@ package com.javarush.task.task17.task1706;
 public class OurPresident {
 
     private static  OurPresident president;
-    static {
-        synchronized (OurPresident.president){
+
+    static Class ObjectCharacterizingThisClass = OurPresident.class; // мы создаем объект(класса Class)
+    // характеризующий наш класс
+    static{
+        synchronized(ObjectCharacterizingThisClass){   // и этот объект мы и блочим
             president = new OurPresident();
         }
     }

@@ -2,6 +2,17 @@ package com.javarush.task.task17.task1722;
 
 /* 
 Посчитаем
+1. Сделай так, чтобы результат успел посчитаться для всех элементов массива values НЕ используя Thread.sleep в методе main(String[] args)
+2. Исправь synchronized блок так, чтобы массив values заполнился значением 1
+
+
+Требования:
+1. Класс Solution должен содержать класс Counter.
+2. Класс Counter должен быть нитью.
+3. Метод run() класса Counter должен содержать synchronized блок.
+4. Synchronized блок метода run() не должен блокировать мьютекс this.
+5. Метод main(String[] args) класса Solution не должен использовать Thread.sleep().
+6. Для каждой нити, в методе main(String[] args) класса Solution используй метод, который ожидает завершение нити.
 */
 
 public class Solution {
@@ -15,6 +26,11 @@ public class Solution {
         counter2.start();
         counter3.start();
         counter4.start();
+
+        counter1.join();
+        counter2.join();
+        counter3.join();
+        counter4.join();
 
         for (int i = 1; i <= 100; i++) {
             if (values[i] != 1) {
@@ -45,7 +61,7 @@ public class Solution {
         @Override
         public void run() {
             do {
-                synchronized (this) {
+                synchronized (Solution.class) {
                     incrementCount();
                     values[getCount()]++;
                 }

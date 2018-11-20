@@ -35,7 +35,7 @@ public class Solution {
         Map<Integer,Integer> map = new HashMap<Integer, Integer>();
 
         int i = 0;
-        
+
         while (inputStream.available() > 0) //пока остались непрочитанные байты
         {
             int data = inputStream.read(); //прочитать очередной байт
